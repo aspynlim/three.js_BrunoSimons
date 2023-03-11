@@ -20,6 +20,11 @@ mesh.position.set(0.6, -0.7, 1);
 // Scale
 mesh.scale.set(2, 0.5, 0.5);
 
+// Rotation
+// mesh.rotation.reorder("YXZ");
+mesh.rotation.x = Math.PI * 0.25;
+mesh.rotation.y = Math.PI * 0.25;
+
 // Axes Helper
 const axesHelper = new THREE.AxesHelper(2);
 scene.add(axesHelper);
@@ -52,6 +57,8 @@ scene.add(camera);
 
 // distance from the camera to the object
 console.log(mesh.position.distanceTo(camera.position));
+
+camera.lookAt(mesh.position);
 
 /**
  * Renderer
