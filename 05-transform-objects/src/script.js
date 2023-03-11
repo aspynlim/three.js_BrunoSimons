@@ -12,10 +12,17 @@ const scene = new THREE.Scene();
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 const mesh = new THREE.Mesh(geometry, material);
-// x,y,z
+scene.add(mesh);
+
+// Position (x,y,z)
 mesh.position.set(0.6, -0.7, 1);
 
-scene.add(mesh);
+// Scale
+mesh.scale.set(2, 0.5, 0.5);
+
+// Axes Helper
+const axesHelper = new THREE.AxesHelper(2);
+scene.add(axesHelper);
 
 // distance from the center to the object
 console.log(mesh.position.length());
@@ -38,6 +45,8 @@ const sizes = {
  * Camera
  */
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
+// camera.position.x = 1;
+// camera.position.y = 1;
 camera.position.z = 3;
 scene.add(camera);
 
