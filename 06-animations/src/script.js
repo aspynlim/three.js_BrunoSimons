@@ -19,16 +19,9 @@ const sizes = {
   height: 600,
 };
 
-// Camera (Field of View in degrees, Aspect Ratio, Near, Far)
-const camera = new THREE.PerspectiveCamera(
-  75,
-  sizes.width / sizes.height,
-  0.1,
-  1000
-);
-camera.position.x = 2;
-camera.position.y = 2;
-camera.position.z = 2;
+// Camera
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
+camera.position.z = 3;
 scene.add(camera);
 
 // Renderer
@@ -38,19 +31,19 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height);
 
 // Clock
-const clock = new THREE.Clock();
-// gsap.to(mesh.position, { duration: 1, delay: 1, x: 2 });
-// gsap.to(mesh.position, { duration: 1, delay: 2, x: 0 });
+// const clock = new THREE.Clock();
+gsap.to(mesh.position, { duration: 1, delay: 1, x: 2 });
+gsap.to(mesh.position, { duration: 1, delay: 2, x: 0 });
 
-// Animate
+// Animations
 const tick = () => {
   // // Clock
-  const elapsedTime = clock.getElapsedTime();
+  // const elapsedTime = clock.getElapsedTime();
 
   // // Update objects
-  camera.position.x = Math.cos(elapsedTime);
-  camera.position.y = Math.sin(elapsedTime);
-  camera.lookAt(mesh.position);
+  // camera.position.x = Math.cos(elapsedTime);
+  // camera.position.y = Math.sin(elapsedTime);
+  // camera.lookAt(mesh.position);
 
   // Renderer
   renderer.render(scene, camera);
