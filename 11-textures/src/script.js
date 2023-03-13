@@ -6,15 +6,15 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
  * Textures
  */
 const loadingManager = new THREE.LoadingManager();
-loadingManager.onStart = () => {
-  console.log("onStart");
-};
-loadingManager.onLoad = () => {
-  console.log("onLoad");
-};
-loadingManager.onProgress = () => {
-  console.log("onProgress");
-};
+// loadingManager.onStart = () => {
+//   console.log("onStart");
+// };
+// loadingManager.onLoad = () => {
+//   console.log("onLoad");
+// };
+// loadingManager.onProgress = () => {
+//   console.log("onProgress");
+// };
 
 const textureLoader = new THREE.TextureLoader(loadingManager);
 const colorTexture = textureLoader.load("/textures/door/color.jpg");
@@ -32,8 +32,10 @@ const scene = new THREE.Scene();
 /**
  * Object
  */
+// const geometry = new THREE.SphereBufferGeometry(1, 32, 32);
 const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ map: alphaTexture });
+console.log(geometry.attributes.uv);
+const material = new THREE.MeshBasicMaterial({ map: colorTexture });
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
