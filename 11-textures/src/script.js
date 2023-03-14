@@ -17,8 +17,13 @@ const loadingManager = new THREE.LoadingManager();
 // };
 
 const textureLoader = new THREE.TextureLoader(loadingManager);
-const colorTexture = textureLoader.load("/textures/door/color.jpg");
+// const colorTexture = textureLoader.load("/textures/door/color.jpg");
+// const colorTexture = textureLoader.load("/textures/checkerboard-8x8.png");
+const colorTexture = textureLoader.load("/textures/minecraft.png");
 const alphaTexture = textureLoader.load("/textures/door/alpha.jpg");
+
+const metalnessTexture = textureLoader.load("/textures/door/metalness.jpg");
+const roughnessTexture = textureLoader.load("/textures/door/roughness.jpg");
 
 // colorTexture.repeat.x = 2;
 // colorTexture.repeat.y = 3;
@@ -28,9 +33,14 @@ const alphaTexture = textureLoader.load("/textures/door/alpha.jpg");
 // colorTexture.offset.x = 0.5;
 // colorTexture.offset.y = 0.5;
 
-colorTexture.rotation = Math.PI / 4;
-colorTexture.center.x = 0.5;
-colorTexture.center.y = 0.5;
+// colorTexture.rotation = Math.PI / 4;
+// colorTexture.center.x = 0.5;
+// colorTexture.center.y = 0.5;
+
+/* When using THREE.NearestFilter on minFilter, no need to use minmaps. */
+colorTexture.generateMipmaps = false;
+// colorTexture.minFilter = THREE.NearestFilter;
+colorTexture.magFilter = THREE.NearestFilter;
 
 /**
  * Base
