@@ -2,6 +2,12 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 /**
+ * Texture
+ */
+const textureLoader = new THREE.TextureLoader();
+const doorColorTexture = textureLoader.load("/textures/door/color.jpg");
+
+/**
  * Base
  */
 // Canvas
@@ -9,6 +15,31 @@ const canvas = document.querySelector("canvas.webgl");
 
 // Scene
 const scene = new THREE.Scene();
+
+/**
+ * Objects
+ */
+// const material = new THREE.MeshBasicMaterial({
+//   map: doorColorTexture,
+// });
+const material = new THREE.MeshBasicMaterial();
+material.map = doorColorTexture;
+
+const sphere = new THREE.Mesh(
+  new THREE.SphereBufferGeometry(0.5, 16, 16),
+  material
+);
+sphere.position.x = -1.5;
+
+const plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), material);
+
+const torus = new THREE.Mesh(
+  new THREE.TorusBufferGeometry(0.3, 0.2, 16, 32),
+  material
+);
+torus.position.x = 1.5;
+
+scene.add(sphere, plane, torus);
 
 /**
  * Sizes
@@ -67,6 +98,11 @@ const clock = new THREE.Clock();
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
+
+  // Update objects
+  sphere.rotation.y = 0.3 * elapsedTime;
+  plane.rotation.x = 0.3 * elapsedTime;
+  torus.rotation.y = 0.3 * elapsedTime;
 
   // Update controls
   controls.update();
