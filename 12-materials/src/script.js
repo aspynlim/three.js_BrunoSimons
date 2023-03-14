@@ -6,6 +6,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
  */
 const textureLoader = new THREE.TextureLoader();
 const doorColorTexture = textureLoader.load("/textures/door/color.jpg");
+const doorAlphaTexture = textureLoader.load("/textures/door/alpha.jpg");
 
 /**
  * Base
@@ -24,6 +25,19 @@ const scene = new THREE.Scene();
 // });
 const material = new THREE.MeshBasicMaterial();
 material.map = doorColorTexture;
+
+// material.color.set("pink");
+// material.color = new THREE.Color("purple");
+
+// material.wireframe = true;
+
+// material.opacity = 0.5;
+material.transparent = true;
+
+material.alphaMap = doorAlphaTexture;
+
+material.side = THREE.BackSide;
+// material.side = THREE.DoubleSide;
 
 const sphere = new THREE.Mesh(
   new THREE.SphereBufferGeometry(0.5, 16, 16),
