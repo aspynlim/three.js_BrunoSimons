@@ -7,6 +7,9 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 const textureLoader = new THREE.TextureLoader();
 const doorColorTexture = textureLoader.load("/textures/door/color.jpg");
 const doorAlphaTexture = textureLoader.load("/textures/door/alpha.jpg");
+// const matcapTexture = textureLoader.load("/textures/matcaps/1.png");
+// const matcapTexture = textureLoader.load("/textures/matcaps/2.png");
+const matcapTexture = textureLoader.load("/textures/matcaps/3.png");
 
 /**
  * Base
@@ -43,9 +46,16 @@ const scene = new THREE.Scene();
  * Objects : MeshBasicMaterial
  */
 
-const material = new THREE.MeshNormalMaterial();
-// material.wireframe = true;
-material.flatShading = true;
+// const material = new THREE.MeshNormalMaterial();
+// // material.wireframe = true;
+// material.flatShading = true;
+
+/**
+ * Objects : MeshMatcapMaterial
+ */
+const material = new THREE.MeshMatcapMaterial();
+// matcap : We get an illusion that objects are being illuminated
+material.matcap = matcapTexture;
 
 /**
  * Objects (continued)
