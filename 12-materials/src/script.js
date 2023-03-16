@@ -53,9 +53,14 @@ const scene = new THREE.Scene();
 /**
  * Objects : MeshMatcapMaterial
  */
-const material = new THREE.MeshMatcapMaterial();
-// matcap : We get an illusion that objects are being illuminated
-material.matcap = matcapTexture;
+// const material = new THREE.MeshMatcapMaterial();
+// // matcap : We get an illusion that objects are being illuminated
+// material.matcap = matcapTexture;
+
+/**
+ * Objects : MeshDepthMaterial
+ */
+const material = new THREE.MeshDepthMaterial();
 
 /**
  * Objects (continued)
