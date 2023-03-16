@@ -10,6 +10,10 @@ const doorAlphaTexture = textureLoader.load("/textures/door/alpha.jpg");
 // const matcapTexture = textureLoader.load("/textures/matcaps/1.png");
 // const matcapTexture = textureLoader.load("/textures/matcaps/2.png");
 const matcapTexture = textureLoader.load("/textures/matcaps/3.png");
+const gradientTexture = textureLoader.load("./textures/gradients/3.jpg");
+gradientTexture.minFilter = THREE.NearestFilter;
+gradientTexture.magFilter = THREE.NearestFilter;
+gradientTexture.generateMipmaps = false;
 
 /**
  * Base
@@ -70,9 +74,15 @@ const scene = new THREE.Scene();
 /**
  * Objects : MeshLambertMaterial
  */
-const material = new THREE.MeshPhongMaterial();
-material.shininess = 100;
-material.specular = new THREE.Color("red");
+// const material = new THREE.MeshPhongMaterial();
+// material.shininess = 100;
+// material.specular = new THREE.Color("red");
+
+/**
+ * Objects : MeshToonMaterial
+ */
+const material = new THREE.MeshToonMaterial();
+material.gradientMap = gradientTexture;
 
 /**
  * Objects (continued)
