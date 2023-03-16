@@ -60,7 +60,19 @@ const scene = new THREE.Scene();
 /**
  * Objects : MeshDepthMaterial
  */
-const material = new THREE.MeshDepthMaterial();
+// const material = new THREE.MeshDepthMaterial();
+
+/**
+ * Objects : MeshLambertMaterial
+ */
+// const material = new THREE.MeshLambertMaterial();
+
+/**
+ * Objects : MeshLambertMaterial
+ */
+const material = new THREE.MeshPhongMaterial();
+material.shininess = 100;
+material.specular = new THREE.Color("red");
 
 /**
  * Objects (continued)
@@ -81,6 +93,16 @@ const torus = new THREE.Mesh(
 torus.position.x = 1.5;
 
 scene.add(sphere, plane, torus);
+
+/**
+ * Lights
+ */
+const ambientLight = new THREE.AmbientLight("white", 0.5);
+scene.add(ambientLight);
+
+const pointLight = new THREE.PointLight("white", 0.5);
+pointLight.position.set(2, 2, 2);
+scene.add(pointLight);
 
 /**
  * Sizes
