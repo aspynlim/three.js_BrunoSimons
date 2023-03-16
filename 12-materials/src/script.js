@@ -18,13 +18,13 @@ const canvas = document.querySelector("canvas.webgl");
 const scene = new THREE.Scene();
 
 /**
- * Objects
+ * Objects : MeshBasicMaterial
  */
 // const material = new THREE.MeshBasicMaterial({
 //   map: doorColorTexture,
 // });
-const material = new THREE.MeshBasicMaterial();
-material.map = doorColorTexture;
+// const material = new THREE.MeshBasicMaterial();
+// material.map = doorColorTexture;
 
 // material.color.set("pink");
 // material.color = new THREE.Color("purple");
@@ -32,12 +32,24 @@ material.map = doorColorTexture;
 // material.wireframe = true;
 
 // material.opacity = 0.5;
-material.transparent = true;
+// material.transparent = true;
 
-material.alphaMap = doorAlphaTexture;
+// material.alphaMap = doorAlphaTexture;
 
-material.side = THREE.BackSide;
+// material.side = THREE.BackSide;
 // material.side = THREE.DoubleSide;
+
+/**
+ * Objects : MeshBasicMaterial
+ */
+
+const material = new THREE.MeshNormalMaterial();
+// material.wireframe = true;
+material.flatShading = true;
+
+/**
+ * Objects (continued)
+ */
 
 const sphere = new THREE.Mesh(
   new THREE.SphereBufferGeometry(0.5, 16, 16),
