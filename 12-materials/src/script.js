@@ -11,25 +11,48 @@ const gui = new dat.GUI();
  * Texture
  */
 const textureLoader = new THREE.TextureLoader();
+const cubeTextureLoader = new THREE.CubeTextureLoader();
+
 const doorColorTexture = textureLoader.load("/textures/door/color.jpg");
 const doorAlphaTexture = textureLoader.load("/textures/door/alpha.jpg");
 const doorHeightTexture = textureLoader.load("/textures/door/height.jpg");
-
 const doorNormalTexture = textureLoader.load("/textures/door/normal.jpg");
 const doorRoughnessTexture = textureLoader.load("/textures/door/roughness.jpg");
 const doorMetalnessTexture = textureLoader.load("/textures/door/metalness.jpg");
-
 // const matcapTexture = textureLoader.load("/textures/matcaps/1.png");
 // const matcapTexture = textureLoader.load("/textures/matcaps/2.png");
 const matcapTexture = textureLoader.load("/textures/matcaps/3.png");
 const doorAmbientOcclusionTexture = textureLoader.load(
   "/textures/door/ambientOcclusion.jpg"
 );
-
 const gradientTexture = textureLoader.load("./textures/gradients/3.jpg");
 gradientTexture.minFilter = THREE.NearestFilter;
 gradientTexture.magFilter = THREE.NearestFilter;
 gradientTexture.generateMipmaps = false;
+
+// const environmentMapTexture = cubeTextureLoader.load([
+//   "/textures/environmentMaps/0/px.jpg",
+//   "/textures/environmentMaps/0/nx.jpg",
+//   "/textures/environmentMaps/0/py.jpg",
+//   "/textures/environmentMaps/0/ny.jpg",
+//   "/textures/environmentMaps/0/pz.jpg",
+//   "/textures/environmentMaps/0/nz.jpg",
+// ]);
+
+const environmentMapTexture = cubeTextureLoader.load([
+  "/textures/environmentMaps/1/px.jpg",
+  "/textures/environmentMaps/1/nx.jpg",
+  "/textures/environmentMaps/1/py.jpg",
+  "/textures/environmentMaps/1/ny.jpg",
+  "/textures/environmentMaps/1/pz.jpg",
+  "/textures/environmentMaps/1/nz.jpg",
+]);
+
+/**
+ * Make your own environment maps
+ */
+// Find images: https://polyhaven.com/hdris
+// MAke cube maps: https://matheowis.github.io/HDRI-to-CubeMap/
 
 /**
  * Base
@@ -104,26 +127,28 @@ const scene = new THREE.Scene();
  * Objects: MeshStandardMaterial - Part 1
  */
 const material = new THREE.MeshStandardMaterial();
-// material.metalness = 0.45;
-// material.roughness = 0.65;
-material.map = doorColorTexture;
-material.aoMap = doorAmbientOcclusionTexture;
-material.aoMapIntensity = 1;
+material.metalness = 0.7;
+material.roughness = 0.2;
+// material.map = doorColorTexture;
+// material.aoMap = doorAmbientOcclusionTexture;
+// material.aoMapIntensity = 1;
 
 /**
  * Objects: MeshStandardMaterial - Part 2
  */
-material.displacementMap = doorHeightTexture;
-material.displacementScale = 0.1;
-material.metalnessMap = doorMetalnessTexture;
-material.roughnessMap = doorRoughnessTexture;
-material.normalMap = doorNormalTexture;
-material.normalScale.set(0.5, 0.5);
+// material.displacementMap = doorHeightTexture;
+// material.displacementScale = 0.1;
+// material.metalnessMap = doorMetalnessTexture;
+// material.roughnessMap = doorRoughnessTexture;
+// material.normalMap = doorNormalTexture;
+// material.normalScale.set(0.5, 0.5);
 
-material.transparent = true;
-material.alphaMap = doorAlphaTexture;
+// material.transparent = true;
+// material.alphaMap = doorAlphaTexture;
 
 // material.wireframe = true;
+
+material.envMap = environmentMapTexture;
 
 gui.add(material, "metalness").min(0).max(1).step(0.001);
 gui.add(material, "roughness").min(0).max(1).step(0.001);
