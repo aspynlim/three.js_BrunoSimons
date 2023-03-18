@@ -1,5 +1,11 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import * as dat from "lil-gui";
+
+/**
+ * Debug
+ */
+const gui = new dat.GUI();
 
 /**
  * Texture
@@ -10,6 +16,10 @@ const doorAlphaTexture = textureLoader.load("/textures/door/alpha.jpg");
 // const matcapTexture = textureLoader.load("/textures/matcaps/1.png");
 // const matcapTexture = textureLoader.load("/textures/matcaps/2.png");
 const matcapTexture = textureLoader.load("/textures/matcaps/3.png");
+const doorAmbientOcclusionTexture = textureLoader.load(
+  "/textures/door/ambientOcclusion.jpg"
+);
+
 const gradientTexture = textureLoader.load("./textures/gradients/3.jpg");
 gradientTexture.minFilter = THREE.NearestFilter;
 gradientTexture.magFilter = THREE.NearestFilter;
@@ -81,8 +91,22 @@ const scene = new THREE.Scene();
 /**
  * Objects : MeshToonMaterial
  */
-const material = new THREE.MeshToonMaterial();
-material.gradientMap = gradientTexture;
+// const material = new THREE.MeshToonMaterial();
+// material.gradientMap = gradientTexture;
+
+/**
+ * Objects: MeshStandardMaterial
+ */
+const material = new THREE.MeshStandardMaterial();
+material.metalness = 0.45;
+material.roughness = 0.65;
+material.map = doorColorTexture;
+material.aoMap = doorAmbientOcclusionTexture;
+material.aoMapIntensity = 10;
+
+gui.add(material, "metalness").min(0).max(1).step(0.001);
+gui.add(material, "roughness").min(0).max(1).step(0.001);
+gui.add(material, "aoMapIntensity").min(0).max(10).step(0.0001);
 
 /**
  * Objects (continued)
@@ -92,15 +116,31 @@ const sphere = new THREE.Mesh(
   new THREE.SphereBufferGeometry(0.5, 16, 16),
   material
 );
+
+sphere.geometry.setAttribute(
+  "uv2",
+  new THREE.BufferAttribute(sphere.geometry.attributes.uv.array, 2)
+);
+
 sphere.position.x = -1.5;
 
 const plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), material);
+
+plane.geometry.setAttribute(
+  "uv2",
+  new THREE.BufferAttribute(plane.geometry.attributes.uv.array, 2)
+);
 
 const torus = new THREE.Mesh(
   new THREE.TorusBufferGeometry(0.3, 0.2, 16, 32),
   material
 );
 torus.position.x = 1.5;
+
+torus.geometry.setAttribute(
+  "uv2",
+  new THREE.BufferAttribute(torus.geometry.attributes.uv.array, 2)
+);
 
 scene.add(sphere, plane, torus);
 
