@@ -19,15 +19,19 @@ const scene = new THREE.Scene()
  */
 // color, intensity
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
-// scene.add(ambientLight)
+scene.add(ambientLight)
 // gui.add(ambientLight, 'intensity').min(0).max(1).step(0.01)
 
 const directionalLight = new THREE.DirectionalLight(0x00fffc, 0.5)
 directionalLight.position.set(1, 0.25, 0)
-// scene.add(directionalLight)
+scene.add(directionalLight)
 
 const hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, 0.3)
 scene.add(hemisphereLight)
+
+const pointLight = new THREE.PointLight(0xff9000, 0.5, 10, 2)
+pointLight.position.set(1, -0.5, 1)
+scene.add(pointLight)
 
 /**
  * Objects
