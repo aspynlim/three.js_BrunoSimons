@@ -3,6 +3,8 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "lil-gui";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
+import typefaceFont from 'three/examples/fonts/helvetiker_bold.typeface.json'
+console.log(typefaceFont)
 
 /**
  * Base
@@ -51,9 +53,30 @@ fontLoader.load("/fonts/helvetiker_regular.typeface.json", (font) => {
   textGeometry.center();
 
   // const textMaterial = new THREE.MeshBasicMaterial({ wireframe: true });
-  const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture });
-  const text = new THREE.Mesh(textGeometry, textMaterial);
+  const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture });
+  const text = new THREE.Mesh(textGeometry, material);
   scene.add(text);
+
+  console.time('donuts')
+
+  const donutGeometry = new THREE.TorusBufferGeometry(0.3, 0.2, 20, 45)
+
+  for(let i=0; i<1000; i++){
+    const donut = new THREE.Mesh(donutGeometry, material)
+
+    donut.position.x = (Math.random() - 0.5) * 10
+    donut.position.y = (Math.random() - 0.5) * 10
+    donut.position.z = (Math.random() - 0.5) * 10
+
+    donut.rotation.x = Math.random() * Math.PI
+    donut.rotation.y = Math.random() * Math.PI
+
+    const scale = Math.random()
+    donut.scale.set(scale, scale, scale)
+
+    scene.add(donut)
+  }  
+  console.timeEnd('donuts')
 });
 
 /**
