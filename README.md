@@ -7,4 +7,14 @@
   * Add it to GitHub: Settings > SSH and GPG keys > SSH Keys
 
 - Run a local server
-  * `npm run dev`
+  * `npm i` (`npm install`) in terminal
+  * `npm run dev` in terminal
+
+- Go live with Vercel
+  * `npm i` (`npm install`) in terminal
+  * add `"deploy": "vercel --prod"` in package.json
+  * `npm i vercel` in terminal
+  * `npm run build` in terminal
+
+- Projects on live
+  * Ch 1-13. 3D Text: https://webgl-3d-text-nu-rose.vercel.app  
