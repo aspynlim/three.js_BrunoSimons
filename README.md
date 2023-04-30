@@ -18,3 +18,5 @@
 
 - Projects on live
   * Ch 1-13. 3D Text: https://webgl-3d-text-nu-rose.vercel.app  
+
+- [Changing a commit message](https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/changing-a-commit-message)
