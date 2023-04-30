@@ -2,6 +2,13 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'lil-gui'
 
+/** 
+ * Textures
+ */
+const textureLoader = new THREE.TextureLoader()
+const bakedShadow = textureLoader.load('/textures/bakedShadow.jpg')
+console.log(bakedShadow)
+
 /**
  * Base
  */
@@ -99,11 +106,14 @@ const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(0.5, 32, 32),
     material
 )
+// sphere.position.y = 1
 sphere.castShadow = true
 
 const plane = new THREE.Mesh(
     new THREE.PlaneGeometry(5, 5),
-    material 
+    new THREE.MeshBasicMaterial({
+        map: bakedShadow
+    }) 
 )
 plane.receiveShadow = true
 
@@ -160,6 +170,10 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = THREE.PCFSoftShadowMap
+
+directionalLight.castShadow = false
+spotLight.castShadow = false
+pointLight.castShadow = false
 
 /**
  * Animate
