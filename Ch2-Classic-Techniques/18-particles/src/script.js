@@ -31,9 +31,11 @@ const particlesGeometry = new THREE.BufferGeometry();
 const count = 20000;
 
 const positions = new Float32Array(count * 3);
+const colors = new Float32Array(count * 3);
 
 for (let i = 0; i < count * 3; i++) {
   positions[i] = (Math.random() - 0.5) * 10;
+  colors[i] = Math.random();
 }
 
 particlesGeometry.setAttribute(
@@ -41,9 +43,11 @@ particlesGeometry.setAttribute(
   new THREE.BufferAttribute(positions, 3)
 );
 
+particlesGeometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+
 // Material
 const particlesMaterial = new THREE.PointsMaterial({
-  color: "pink",
+  // color: "pink",
   size: 0.05,
   sizeAttenuation: true,
   // map: particleTexture,
@@ -53,6 +57,7 @@ const particlesMaterial = new THREE.PointsMaterial({
   // depthTest: false,
   depthWrite: false,
   blending: THREE.AdditiveBlending,
+  vertexColors: true,
 });
 
 // Points
