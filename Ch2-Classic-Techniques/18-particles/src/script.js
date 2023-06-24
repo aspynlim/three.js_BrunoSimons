@@ -20,6 +20,7 @@ const scene = new THREE.Scene();
  * Textures
  */
 const textureLoader = new THREE.TextureLoader();
+const particleTexture = textureLoader.load("/textures/particles/2.png");
 
 /**
  * Particles
@@ -27,7 +28,7 @@ const textureLoader = new THREE.TextureLoader();
 // Geometry
 // const particlesGeometry = new THREE.SphereBufferGeometry(1, 32, 32);
 const particlesGeometry = new THREE.BufferGeometry();
-const count = 500;
+const count = 50000;
 
 const positions = new Float32Array(count * 3);
 
@@ -42,13 +43,27 @@ particlesGeometry.setAttribute(
 
 // Material
 const particlesMaterial = new THREE.PointsMaterial({
-  size: 0.02,
+  color: "purple",
+  size: 0.05,
   sizeAttenuation: true,
+  // map: particleTexture,
+  alphaMap: particleTexture,
+  transparent: true,
+  // alphaTest: 0.001,
+  // depthTest: false,
+  depthWrite: false,
 });
 
 // Points
 const particles = new THREE.Points(particlesGeometry, particlesMaterial);
 scene.add(particles);
+
+// Cube
+const cube = new THREE.Mesh(
+  new THREE.BoxBufferGeometry(),
+  new THREE.MeshBasicMaterial()
+);
+scene.add(cube);
 
 /**
  * Sizes
