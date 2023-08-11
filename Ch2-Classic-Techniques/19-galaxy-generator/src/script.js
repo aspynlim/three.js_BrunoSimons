@@ -17,13 +17,28 @@ const canvas = document.querySelector("canvas.webgl");
 const scene = new THREE.Scene();
 
 /**
- * Test cube
+ * Galaxy
  */
-const cube = new THREE.Mesh(
-  new THREE.BoxGeometry(1, 1, 1),
-  new THREE.MeshBasicMaterial()
-);
-scene.add(cube);
+const parameters = {};
+parameters.count = 1000;
+
+const generateGalaxy = () => {
+  /**
+   * Geometry
+   */
+  const geometry = new THREE.BufferGeometry();
+  const positions = new Float32Array(parameters.count * 3);
+
+  for (let i = 0; i < parameters.count; i++) {
+    const i3 = i * 3;
+    positions[i3 + 0] = Math.random();
+    positions[i3 + 1] = Math.random();
+    positions[i3 + 2] = Math.random();
+  }
+
+  geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+};
+generateGalaxy();
 
 /**
  * Sizes
